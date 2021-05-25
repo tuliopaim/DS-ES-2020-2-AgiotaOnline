@@ -31,6 +31,7 @@ namespace EO.UI
 
             services.InjectIdentity();
 
+            services.AddRazorPages();
             services.AddControllersWithViews();
         }
 
@@ -56,6 +57,8 @@ namespace EO.UI
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
