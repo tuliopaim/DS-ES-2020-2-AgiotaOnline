@@ -8,7 +8,7 @@
     <Folder Include="Interfaces\" />
     <Folder Include="AppServices\" />
     <Folder Include="Mappings\" />
-    <Folder Include="ViewModels\" />
+    <Folder Include="ViewModels\InputModels\" />
   </ItemGroup>
 
   <ItemGroup>
