@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
 using EO.Application.Interfaces;
 using EO.Application.ViewModels.InputModels.Usuario;
 using EO.Domain.Entities;
@@ -8,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace EO.UI.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<AccountController> _logger;
@@ -67,6 +68,8 @@ namespace EO.UI.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
+
+            await _userManager.AddClaimAsync(user, new Claim(nameof(user.Nome), user.Nome));
 
             if (result.Succeeded)
             {
@@ -133,7 +136,9 @@ namespace EO.UI.Controllers
         [HttpGet]
         public IActionResult Perfil()
         {
-            return View();
+            var model = new EditarUsuarioViewModel { Id = ObterIdUsuarioLogado() };
+
+            return View(model);
         }
         
         [HttpPost]
@@ -143,7 +148,7 @@ namespace EO.UI.Controllers
 
             await _userAppService.AtualizarUsuario(model);
 
-            return View("Perfil");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
