@@ -1,4 +1,4 @@
-﻿namespace EO.Application.ViewModels.InputModels
+﻿namespace EO.Application.ViewModels.InputModels.Usuario
 {
     public class CriarEnderecoViewModel
     {

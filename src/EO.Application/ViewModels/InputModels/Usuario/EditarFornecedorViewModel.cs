@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel;
 
-namespace EO.Application.ViewModels.InputModels
+namespace EO.Application.ViewModels.InputModels.Usuario
 {
-    public class CriarFornecedorViewModel
+    public class EditarFornecedorViewModel
     {
+
         [DisplayName("Capital Disponível")]
         public decimal Capital { get; set; }
     }

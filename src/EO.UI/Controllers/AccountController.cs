@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using EO.Application.ViewModels.InputModels;
+using EO.Application.ViewModels.InputModels.Usuario;
 using EO.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -127,6 +128,12 @@ namespace EO.UI.Controllers
             await _signInManager.SignOutAsync();
 
             return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        public IActionResult Perfil()
+        {
+            return View();
         }
     }
 }

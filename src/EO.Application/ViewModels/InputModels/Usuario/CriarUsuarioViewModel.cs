@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using EO.Domain.Enums;
 
-namespace EO.Application.ViewModels.InputModels
+namespace EO.Application.ViewModels.InputModels.Usuario
 {
     public class CriarUsuarioViewModel
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EO.Application.ViewModels.InputModels
+namespace EO.Application.ViewModels.InputModels.Usuario
 {
     public class TrocarSenhaViewModel
     {
