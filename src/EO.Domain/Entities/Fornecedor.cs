@@ -15,6 +15,7 @@
         public decimal Capital { get; private set; }
 
         public int UserId { get; private set; }
+        public User User { get; set; }
 
         public void AlterarCapital(decimal novoCapital)
         {

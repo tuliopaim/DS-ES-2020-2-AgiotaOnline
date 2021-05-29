@@ -18,6 +18,7 @@
         public Endereco Endereco { get; set; }
 
         public int UserId { get; private set; }
+        public User User { get; set; }
 
         public void AlterarRendaMensal(decimal novaRenda)
         {

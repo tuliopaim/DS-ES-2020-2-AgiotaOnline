@@ -5,7 +5,6 @@ using EO.Domain.Entities;
 using EO.Domain.Interfaces;
 using EO.Infra;
 using EO.Infra.Repositories;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EO.UI
