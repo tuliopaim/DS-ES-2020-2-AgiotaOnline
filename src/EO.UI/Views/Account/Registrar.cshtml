@@ -1,0 +1,85 @@
+﻿@using EO.Domain.Enums
+@model EO.Application.ViewModels.InputModels.CriarUsuarioViewModel
+
+@{
+    ViewData["Title"] = "Registrar";
+}
+
+<style>
+    .checkbox-tipo {
+        padding: 0 12px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+</style>
+
+<h1>Registrar</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <section>
+            <form id="account" method="post" asp-action="RegistrarUsuario">
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="mb-2">
+                    @await Html.PartialAsync("_User", Model)
+                </div>
+
+                <div class="mb-4">
+                    <h5>Tipo de Usuario</h5>
+                    <hr />
+                    <div class="form-row">
+                        <div class="col-6 checkbox-tipo">
+                            <div class="col-md-5 form-check form-check-inline">
+                                <input asp-for="TipoUsuario" id="tomador" class="form-check-input tipo-opcao" value="@TipoUsuario.Tomador" type="radio" checked />
+                                <label class="form-check-label">Tomador</label>
+                            </div>
+                            <div class="col-md-5 form-check form-check-inline">
+                                <input asp-for="TipoUsuario" id="fornecedor" class="form-check-input tipo-opcao" value="@TipoUsuario.Fornecedor" type="radio" />
+                                <label class="form-check-label">Fornecedor</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="div-tomador" class="mb-2">
+                    <partial for="@Model.Tomador" name="_Tomador"/>
+                </div>
+
+                <div id="div-fornecedor" class="mb-2" style="display: none;">
+                    <partial for="@Model.Fornecedor" name="_Fornecedor" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Registrar
+                </button>
+            </form>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(function () {
+            $(".tipo-opcao").on("click",
+                function () {
+                    let ehTomador = $("#tomador").is(":checked");
+
+                    if (ehTomador) {
+                        $("#div-tomador").show(200);
+                        $("#div-fornecedor").hide(200);
+                    } else {
+                        $("#div-tomador").hide(200);
+                        $("#div-fornecedor").show(200);
+                    }
+                }
+            );
+        });
+    </script>
+}
+

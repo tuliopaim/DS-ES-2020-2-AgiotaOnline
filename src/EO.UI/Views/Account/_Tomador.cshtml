@@ -1,0 +1,55 @@
+﻿@model EO.Application.ViewModels.InputModels.CriarTomadorViewModel
+
+<h5>Tomador</h5>
+<hr />
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label asp-for="@Model.RendaMensal"></label>
+        <input asp-for="@Model.RendaMensal" class="form-control" />
+        <span asp-validation-for="@Model.RendaMensal" class="text-danger"></span>
+    </div>
+</div>
+
+<h5>Endereço</h5>
+<hr/>
+
+<div class="row">
+    <div class="form-group col-md-2">
+        <label asp-for="@Model.Endereco.Cep"></label>
+        <input asp-for="@Model.Endereco.Cep" class="form-control" />
+        <span asp-validation-for="@Model.Endereco.Cep" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-4">
+        <label asp-for="@Model.Endereco.Rua"></label>
+        <input asp-for="@Model.Endereco.Cep" class="form-control" />
+        <span asp-validation-for="@Model.Endereco.Cep" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="@Model.Endereco.Logradouro"></label>
+        <input asp-for="@Model.Endereco.Logradouro" class="form-control" />
+        <span asp-validation-for="@Model.Endereco.Logradouro" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-3">
+        <label asp-for="@Model.Endereco.Bairro"></label>
+        <input asp-for="@Model.Endereco.Bairro" class="form-control" />
+        <span asp-validation-for="@Model.Endereco.Bairro" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-3">
+        <label asp-for="@Model.Endereco.Cidade"></label>
+        <input asp-for="@Model.Endereco.Cidade" class="form-control" />
+        <span asp-validation-for="@Model.Endereco.Cidade" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-3">
+        <label asp-for="@Model.Endereco.Estado"></label>
+        <input asp-for="@Model.Endereco.Cidade" class="form-control" />
+        <span asp-validation-for="@Model.Endereco.Cidade" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-3">
+        <label asp-for="@Model.Endereco.Pais"></label>
+        <input asp-for="@Model.Endereco.Pais" class="form-control" />
+        <span asp-validation-for="@Model.Endereco.Pais" class="text-danger"></span>
+    </div>
+</div>

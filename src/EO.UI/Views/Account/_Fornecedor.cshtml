@@ -1,0 +1,12 @@
+﻿@model EO.Application.ViewModels.InputModels.CriarFornecedorViewModel
+
+<h5>Fornecedor</h5>
+<hr />
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label asp-for="@Model.Capital"></label>
+        <input asp-for="@Model.Capital" class="form-control" />
+        <span asp-validation-for="@Model.Capital" class="text-danger"></span>
+    </div>
+</div>
