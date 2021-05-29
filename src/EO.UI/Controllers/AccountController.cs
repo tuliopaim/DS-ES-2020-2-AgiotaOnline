@@ -83,9 +83,9 @@ namespace EO.UI.Controllers
         }
 
         [HttpGet]
-        public IActionResult TrocarSenha()
+        public IActionResult AlterarSenha()
         {
-            return View(new TrocarSenhaViewModel());
+            return View();
         }
 
         [HttpPost]
@@ -100,7 +100,7 @@ namespace EO.UI.Controllers
             {
                 ModelState.AddModelError(nameof(model.Password), "Senha incorreta!");
                 
-                return View("TrocarSenha");
+                return View("AlterarSenha");
             }
 
             if (user == null)
@@ -119,7 +119,7 @@ namespace EO.UI.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
 
-            return View("TrocarSenha");
+            return View("AlterarSenha");
         }
 
         [HttpPost]
