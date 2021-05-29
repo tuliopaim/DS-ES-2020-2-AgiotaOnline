@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using EO.Application.ViewModels.InputModels;
+using EO.Application.Interfaces;
 using EO.Application.ViewModels.InputModels.Usuario;
 using EO.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -13,15 +13,18 @@ namespace EO.UI.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<AccountController> _logger;
         private readonly UserManager<User> _userManager;
+        private readonly IUserAppService _userAppService;
 
         public AccountController(
             SignInManager<User> signInManager,
             ILogger<AccountController> logger,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            IUserAppService userAppService)
         {
             _signInManager = signInManager;
             _logger = logger;
             _userManager = userManager;
+            _userAppService = userAppService;
         }
 
         [HttpGet]
@@ -57,20 +60,17 @@ namespace EO.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarUsuario(CriarUsuarioViewModel model)
         {
-            var user = new User
+            var user = new User(model.Nome, model.Cpf, model.Telefone, model.ChavePix)
             {
                 UserName = model.Email,
                 Email = model.Email,
-                Cpf = model.Cpf,
-                Telefone = model.Telefone,
-                ChavePix = model.ChavePix,
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
-                await _signInManager.SignInAsync(user, isPersistent: true);
+                await _signInManager.SignInAsync(user, true);
                 return RedirectToAction("Index", "Home");
             }
 
@@ -139,6 +139,10 @@ namespace EO.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> EditarPerfil(EditarUsuarioViewModel model)
         {
+            if (!ModelState.IsValid) return View("Perfil", model);
+
+            await _userAppService.AtualizarUsuario(model);
+
             return View("Perfil");
         }
     }

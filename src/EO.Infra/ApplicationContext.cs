@@ -10,5 +10,9 @@ namespace EO.Infra
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
         }
+
+        public DbSet<Tomador> Tomadores { get; set; }
+        public DbSet<Tomador> Fornecedores { get; set; }
+        public DbSet<Tomador> Enderecos { get; set; }
     }
 }

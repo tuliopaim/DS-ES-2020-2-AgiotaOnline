@@ -6,6 +6,9 @@ namespace EO.Application.ViewModels.InputModels.Usuario
     public class EditarUsuarioViewModel
     {
         [Required]
+        public int Id { get; set; }
+
+        [Required]
         [DisplayName("Telefone")]
         public string Telefone { get; set; }
 

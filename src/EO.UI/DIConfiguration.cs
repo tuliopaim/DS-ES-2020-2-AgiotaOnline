@@ -1,13 +1,18 @@
 ﻿using System;
+using EO.Application.AppServices;
+using EO.Application.Interfaces;
 using EO.Domain.Entities;
+using EO.Domain.Interfaces;
 using EO.Infra;
+using EO.Infra.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EO.UI
 {
     public static class DiConfiguration
     {
-        public static void InjectIdentity(this IServiceCollection services)
+        public static void InjetarIdentity(this IServiceCollection services)
         {
             services.AddDefaultIdentity<User>(options =>
             {
@@ -24,7 +29,16 @@ namespace EO.UI
             {
                 options.SlidingExpiration = true;
                 options.ExpireTimeSpan = TimeSpan.FromHours(6);
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
             });
+        }
+
+        public static void InjetarServicos(this IServiceCollection services)
+        {
+            services.AddScoped<IUserAppService, UserAppService>();
+            
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }
