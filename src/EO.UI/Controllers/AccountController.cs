@@ -1,8 +1,6 @@
 ﻿using System.Threading.Tasks;
 using EO.Application.ViewModels.InputModels;
 using EO.Domain.Entities;
-using EO.UI.Areas.Identity.Pages.Account;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,12 +10,12 @@ namespace EO.UI.Controllers
     public class AccountController : Controller
     {
         private readonly SignInManager<User> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
+        private readonly ILogger<AccountController> _logger;
         private readonly UserManager<User> _userManager;
 
         public AccountController(
             SignInManager<User> signInManager,
-            ILogger<LoginModel> logger,
+            ILogger<AccountController> logger,
             UserManager<User> userManager)
         {
             _signInManager = signInManager;
@@ -86,13 +84,49 @@ namespace EO.UI.Controllers
         [HttpGet]
         public IActionResult TrocarSenha()
         {
-            return View();
+            return View(new TrocarSenhaViewModel());
         }
 
         [HttpPost]
-        public IActionResult RealizarTrocaDeSenha()
+        public async Task<IActionResult> RealizarTrocaDeSenha(TrocarSenhaViewModel model)
         {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            var senhaCorreta = await _signInManager
+                .CheckPasswordSignInAsync(user, model.Password, false);
+
+            if (!senhaCorreta.Succeeded)
+            {
+                ModelState.AddModelError(nameof(model.Password), "Senha incorreta!");
+                
+                return View("TrocarSenha");
+            }
+
+            if (user == null)
+            {
+                return RedirectToPage("./ResetPasswordConfirmation");
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, "", model.NewPassword);
+            if (result.Succeeded)
+            {
+                return RedirectToPage("./ResetPasswordConfirmation");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
             return View("TrocarSenha");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RealizarLogout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("Login");
         }
     }
 }
