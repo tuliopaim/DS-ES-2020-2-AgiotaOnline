@@ -135,5 +135,11 @@ namespace EO.UI.Controllers
         {
             return View();
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> EditarPerfil(EditarUsuarioViewModel model)
+        {
+            return View("Perfil");
+        }
     }
 }
