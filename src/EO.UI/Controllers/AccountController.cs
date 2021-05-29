@@ -134,9 +134,11 @@ namespace EO.UI.Controllers
         }
 
         [HttpGet]
-        public IActionResult Perfil()
+        public async Task<IActionResult> Editar()
         {
-            var model = new EditarUsuarioViewModel { Id = ObterIdUsuarioLogado() };
+            var id = ObterIdUsuarioLogado();
+
+            var model = await _userAppService.ObterUsuarioParaEdicao(id);
 
             return View(model);
         }
