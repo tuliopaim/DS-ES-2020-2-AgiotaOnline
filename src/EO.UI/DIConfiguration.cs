@@ -38,6 +38,8 @@ namespace EO.UI
             services.AddScoped<IUserAppService, UserAppService>();
             
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITomadorRepository, TomadorRepository>();
+            services.AddScoped<IFornecedorRepository, FornecedorRepository>();
         }
     }
 }
