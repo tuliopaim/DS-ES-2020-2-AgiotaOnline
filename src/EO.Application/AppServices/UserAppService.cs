@@ -97,12 +97,24 @@ namespace EO.Application.AppServices
         {
             var user = await _userRepository.ObterPorId(id);
 
-            return new EditarUsuarioViewModel
+            var editarViewModel = new EditarUsuarioViewModel
             {
                 Id = id,
                 Telefone = user.Telefone,
                 ChavePix = user.ChavePix,
+                Tipo = user.Tipo,
             };
+
+            if (user.Tipo == TipoUsuario.Fornecedor)
+            {
+                editarViewModel.Fornecedor = await _fornecedorAppService.ObterParaEdicao(user.Id);
+            }
+            else
+            {
+                editarViewModel.Tomador = await _tomadorAppService.ObterParaEdicao(user.Id);
+            }
+
+            return editarViewModel;
         }
 
         public async Task AtualizarUsuario(EditarUsuarioViewModel model)
