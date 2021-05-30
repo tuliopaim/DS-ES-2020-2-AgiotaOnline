@@ -1,6 +1,9 @@
-﻿namespace EO.Application.Interfaces
+﻿using EO.Domain.Entities;
+using EO.Domain.Interfaces;
+
+namespace EO.Application.Interfaces
 {
-    public interface IFornecedorRepository
+    public interface IFornecedorRepository : IGenericRepository<Fornecedor>
     {
     }
 }

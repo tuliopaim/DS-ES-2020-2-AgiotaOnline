@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using EO.Application.Interfaces;
 using EO.Application.ViewModels.InputModels.Usuario;
+using EO.Domain.Entities;
 
 namespace EO.Application.AppServices
 {
@@ -13,14 +14,13 @@ namespace EO.Application.AppServices
             _repository = repository;
         }
 
-        public Task Adicionar(CriarTomadorViewModel model)
+        public async Task Adicionar(CriarTomadorViewModel model, int usuarioId)
         {
-            throw new System.NotImplementedException();
-        }
-    }
+            var tomador = new Tomador(model.RendaMensal, usuarioId);
 
-    public interface ITomadorAppService
-    {
-        Task Adicionar(CriarTomadorViewModel model);
+            _repository.Add(tomador);
+
+            await _repository.SaveChangesAsync();
+        }
     }
 }

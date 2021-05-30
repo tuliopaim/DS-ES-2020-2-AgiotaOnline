@@ -36,7 +36,9 @@ namespace EO.UI
         public static void InjetarServicos(this IServiceCollection services)
         {
             services.AddScoped<IUserAppService, UserAppService>();
-            
+            services.AddScoped<ITomadorAppService, TomadorAppService>();
+            services.AddScoped<IFornecedorAppService, FornecedorAppService>();
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITomadorRepository, TomadorRepository>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();

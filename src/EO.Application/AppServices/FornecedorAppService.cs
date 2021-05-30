@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using EO.Application.Interfaces;
 using EO.Application.ViewModels.InputModels.Usuario;
+using EO.Domain.Entities;
 
 namespace EO.Application.AppServices
 {
@@ -13,14 +14,13 @@ namespace EO.Application.AppServices
             _repository = repository;
         }
         
-        public Task Adicionar(CriarFornecedorViewModel model)
+        public async Task Adicionar(CriarFornecedorViewModel model, int usuarioId)
         {
-            throw new System.NotImplementedException();
-        }
-    }
+            var fornecedor = new Fornecedor(model.Capital, usuarioId);
 
-    public interface IFornecedorAppService
-    {
-        Task Adicionar(CriarFornecedorViewModel model);
+            _repository.Add(fornecedor);
+
+            await _repository.SaveChangesAsync();
+        }
     }
 }
