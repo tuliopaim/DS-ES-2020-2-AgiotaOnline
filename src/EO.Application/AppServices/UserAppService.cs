@@ -73,9 +73,8 @@ namespace EO.Application.AppServices
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded) return result;
 
-            //todo: configurar claim tipo
-
             await _userManager.AddClaimAsync(user, new Claim(nameof(user.Nome), user.Nome));
+            await _userManager.AddClaimAsync(user, new Claim("TipoUsuario", user.Tipo.ToString()));
 
             await _signInManager.SignInAsync(user, true);
             
