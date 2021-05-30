@@ -42,6 +42,8 @@ namespace EO.UI
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITomadorRepository, TomadorRepository>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }

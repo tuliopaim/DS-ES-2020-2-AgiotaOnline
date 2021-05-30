@@ -75,11 +75,6 @@ namespace EO.Infra.Repositories.Base
 
             return query;
         }
-
-        public async Task SaveChangesAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
         
         public void Dispose()
         {

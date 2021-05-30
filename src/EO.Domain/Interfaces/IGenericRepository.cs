@@ -11,6 +11,5 @@ namespace EO.Domain.Interfaces
         void Update(T entity);
         Task<int> CountAsync(Expression<Func<T, bool>> expression);
         Task<T> GetByIdAsync(int id, bool track = false);
-        Task SaveChangesAsync();
     }
 }
