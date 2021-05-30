@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using EO.Domain.Enums;
 
 namespace EO.Application.ViewModels.InputModels.Usuario
 {
@@ -15,6 +16,8 @@ namespace EO.Application.ViewModels.InputModels.Usuario
         [Required]
         [DisplayName("Chave Pix")]
         public string ChavePix { get; set; }
+
+        public TipoUsuario Tipo { get; set; }
 
         public EditarTomadorViewModel Tomador { get; set; }
 

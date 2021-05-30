@@ -1,12 +1,13 @@
-﻿@model EO.Application.ViewModels.InputModels.Usuario.EditarUsuarioViewModel
+﻿@using EO.Domain.Enums
+@model EO.Application.ViewModels.InputModels.Usuario.EditarUsuarioViewModel
 
 <h1>Editar Perfil</h1>
 
 <hr/>
 
 <form id="perfil" method="post" asp-action="EditarPerfil">
-    <input asp-for="Id" type="hidden"/>
-    
+    <input asp-for="Id" type="hidden" />
+
     <div class="form-row">
         <div class="form-group col-md-6">
             <label asp-for="@Model.Telefone"></label>
@@ -18,9 +19,80 @@
             <input asp-for="@Model.ChavePix" class="form-control" />
             <span asp-validation-for="@Model.ChavePix" class="text-danger"></span>
         </div>
-
-        <button type="submit" class="btn btn-primary">Alterar</button>
     </div>
+    
+    @if (Model.Tipo == TipoUsuario.Fornecedor)
+    {
+        <div id="div-fornecedor" class="mb-2">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="@Model.Fornecedor.Capital"></label>
+                    <input asp-for="@Model.Fornecedor.Capital" class="form-control" />
+                    <span asp-validation-for="@Model.Fornecedor.Capital" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div id="div-tomador" class="mb-2">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="@Model.Tomador.RendaMensal"></label>
+                    <input asp-for="@Model.Tomador.RendaMensal" class="form-control" />
+                    <span asp-validation-for="@Model.Tomador.RendaMensal" class="text-danger"></span>
+                </div>
+            </div>
+
+            <h5>Endereço</h5>
+            <hr />
+
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <label asp-for="@Model.Tomador.Endereco.Cep"></label>
+                    <input asp-for="@Model.Tomador.Endereco.Cep" class="form-control" />
+                    <span asp-validation-for="@Model.Tomador.Endereco.Cep" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="@Model.Tomador.Endereco.Rua"></label>
+                    <input asp-for="@Model.Tomador.Endereco.Rua" class="form-control" />
+                    <span asp-validation-for="@Model.Tomador.Endereco.Rua" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="@Model.Tomador.Endereco.Logradouro"></label>
+                    <input asp-for="@Model.Tomador.Endereco.Logradouro" class="form-control" />
+                    <span asp-validation-for="@Model.Tomador.Endereco.Logradouro" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label asp-for="@Model.Tomador.Endereco.Bairro"></label>
+                    <input asp-for="@Model.Tomador.Endereco.Bairro" class="form-control" />
+                    <span asp-validation-for="@Model.Tomador.Endereco.Bairro" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="@Model.Tomador.Endereco.Cidade"></label>
+                    <input asp-for="@Model.Tomador.Endereco.Cidade" class="form-control" />
+                    <span asp-validation-for="@Model.Tomador.Endereco.Cidade" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="@Model.Tomador.Endereco.Estado"></label>
+                    <input asp-for="@Model.Tomador.Endereco.Estado" class="form-control" />
+                    <span asp-validation-for="@Model.Tomador.Endereco.Estado" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="@Model.Tomador.Endereco.Pais"></label>
+                    <input asp-for="@Model.Tomador.Endereco.Pais" class="form-control" />
+                    <span asp-validation-for="@Model.Tomador.Endereco.Pais" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+    }
+    
+    
+    <button type="submit" class="btn btn-primary">Alterar</button>
+
 </form>
 
 @section Scripts {
