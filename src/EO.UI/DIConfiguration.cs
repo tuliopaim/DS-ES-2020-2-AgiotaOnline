@@ -1,6 +1,7 @@
 ﻿using System;
 using EO.Application.AppServices;
 using EO.Application.Interfaces;
+using EO.Application.Mappings;
 using EO.Domain.Entities;
 using EO.Domain.Interfaces;
 using EO.Infra;
@@ -44,6 +45,8 @@ namespace EO.UI
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddSingleton(new AutoMapperConfig().GetMapperConfig().CreateMapper());
         }
     }
 }
