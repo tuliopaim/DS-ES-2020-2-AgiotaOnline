@@ -1,5 +1,3 @@
-using System;
-
 namespace EO.UI.Models
 {
     public class ErrorViewModel

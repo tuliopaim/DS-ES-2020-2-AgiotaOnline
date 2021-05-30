@@ -1,7 +1,6 @@
 ﻿using EO.Domain.Entities;
-using EO.Domain.Interfaces;
 
-namespace EO.Application.Interfaces
+namespace EO.Domain.Interfaces
 {
     public interface ITomadorRepository : IGenericRepository<Tomador>
     {

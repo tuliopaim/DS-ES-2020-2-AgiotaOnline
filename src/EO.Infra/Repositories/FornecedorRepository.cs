@@ -1,5 +1,5 @@
-﻿using EO.Application.Interfaces;
-using EO.Domain.Entities;
+﻿using EO.Domain.Entities;
+using EO.Domain.Interfaces;
 using EO.Infra.Repositories.Base;
 
 namespace EO.Infra.Repositories
