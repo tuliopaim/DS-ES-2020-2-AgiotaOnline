@@ -18,8 +18,8 @@ namespace EO.UI.Controllers
 
         public AccountController(
             SignInManager<User> signInManager,
-            ILogger<AccountController> logger,
             UserManager<User> userManager,
+            ILogger<AccountController> logger,
             IUserAppService userAppService)
         {
             _signInManager = signInManager;
@@ -61,27 +61,13 @@ namespace EO.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarUsuario(CriarUsuarioViewModel model)
         {
-            var user = new User(model.Nome, model.Cpf, model.Telefone, model.ChavePix)
+            var result = await _userAppService.AdicionarUsuario(model);
+
+            if (result)
             {
-                UserName = model.Email,
-                Email = model.Email,
-            };
-
-            var result = await _userManager.CreateAsync(user, model.Password);
-
-            await _userManager.AddClaimAsync(user, new Claim(nameof(user.Nome), user.Nome));
-
-            if (result.Succeeded)
-            {
-                await _signInManager.SignInAsync(user, true);
                 return RedirectToAction("Index", "Home");
             }
-
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-
+            
             return View("Registrar");
         }
 

@@ -5,6 +5,8 @@ namespace EO.Application.Interfaces
 {
     public interface IUserAppService
     {
+        Task<bool> AdicionarUsuario(CriarUsuarioViewModel model);
+
         Task<EditarUsuarioViewModel> ObterUsuarioParaEdicao(int id);
 
         Task AtualizarUsuario(EditarUsuarioViewModel model);
