@@ -37,6 +37,12 @@ namespace EO.UI.Extensions
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
+            if (!context.HttpContext.User.Identity!.IsAuthenticated)
+            {
+                context.Result = new RedirectToActionResult("Login", "Account", null);
+                return;
+            }
+
             if (!CustomAuthorization.ValidarClaimsUsuario(context.HttpContext, _claim.Type, _claim.Value))
             {
                 context.Result = new ForbidResult();
