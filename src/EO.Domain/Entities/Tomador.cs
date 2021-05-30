@@ -6,10 +6,11 @@
         {
         }
 
-        public Tomador(decimal rendaMensal, int userId)
+        public Tomador(decimal rendaMensal, int userId, Endereco endereco)
         {
             RendaMensal = rendaMensal;
             UserId = userId;
+            Endereco = endereco;
         }
 
         public decimal RendaMensal { get; private set; }

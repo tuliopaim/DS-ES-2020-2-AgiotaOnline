@@ -5,6 +5,6 @@ namespace EO.Application.Interfaces
 {
     public interface IFornecedorAppService
     {
-        Task Adicionar(CriarFornecedorViewModel model, int usuarioId);
+        void Adicionar(CriarFornecedorViewModel model, int usuarioId);
     }
 }

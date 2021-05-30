@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
-using EO.Application.ViewModels.InputModels.Usuario;
+﻿using EO.Application.ViewModels.InputModels.Usuario;
 
-namespace EO.Application.AppServices
+namespace EO.Application.Interfaces
 {
     public interface ITomadorAppService
     {
-        Task Adicionar(CriarTomadorViewModel model, int usuarioId);
+        void Adicionar(CriarTomadorViewModel model, int usuarioId);
     }
 }

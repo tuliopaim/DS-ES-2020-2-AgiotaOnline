@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using EO.Application.Interfaces;
 using EO.Application.ViewModels.InputModels.Usuario;
 using EO.Domain.Entities;
 using EO.Domain.Interfaces;
@@ -14,13 +14,20 @@ namespace EO.Application.AppServices
             _repository = repository;
         }
 
-        public async Task Adicionar(CriarTomadorViewModel model, int usuarioId)
+        public void Adicionar(CriarTomadorViewModel model, int usuarioId)
         {
-            var tomador = new Tomador(model.RendaMensal, usuarioId);
+            var endereco = new Endereco(
+                model.Endereco.Cep,
+                model.Endereco.Logradouro,
+                model.Endereco.Rua,
+                model.Endereco.Bairro,
+                model.Endereco.Cidade,
+                model.Endereco.Estado,
+                model.Endereco.Pais);
+
+            var tomador = new Tomador(model.RendaMensal, usuarioId, endereco);
 
             _repository.Add(tomador);
-
-            await _repository.SaveChangesAsync();
         }
     }
 }

@@ -15,13 +15,11 @@ namespace EO.Application.AppServices
             _repository = repository;
         }
         
-        public async Task Adicionar(CriarFornecedorViewModel model, int usuarioId)
+        public void Adicionar(CriarFornecedorViewModel model, int usuarioId)
         {
             var fornecedor = new Fornecedor(model.Capital, usuarioId);
 
             _repository.Add(fornecedor);
-
-            await _repository.SaveChangesAsync();
         }
     }
 }
