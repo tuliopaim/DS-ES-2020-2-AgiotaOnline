@@ -81,26 +81,11 @@ namespace EO.UI.Controllers
         public async Task<IActionResult> RealizarTrocaDeSenha(TrocarSenhaViewModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
-
-            var senhaCorreta = await _signInManager
-                .CheckPasswordSignInAsync(user, model.Password, false);
-
-            if (!senhaCorreta.Succeeded)
-            {
-                ModelState.AddModelError(nameof(model.Password), "Senha incorreta!");
-                
-                return View("AlterarSenha");
-            }
-
-            if (user == null)
-            {
-                return RedirectToPage("./ResetPasswordConfirmation");
-            }
-
-            var result = await _userManager.ResetPasswordAsync(user, "", model.NewPassword);
+            
+            var result = await _userManager.ChangePasswordAsync(user, model.Password, model.NewPassword);
             if (result.Succeeded)
             {
-                return RedirectToPage("./ResetPasswordConfirmation");
+                return RedirectToAction("Login", "Account");
             }
 
             foreach (var error in result.Errors)
