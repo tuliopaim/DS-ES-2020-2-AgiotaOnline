@@ -1,15 +1,23 @@
-﻿namespace EO.Domain.Entities
+﻿using EO.Domain.Validations;
+using FluentValidation.Results;
+
+namespace EO.Domain.Entities
 {
     public class Fornecedor : Entidade
     {
+        private readonly FornecedorValidator _validador;
+
         protected Fornecedor()
         {
+            _validador = new FornecedorValidator();
         }
 
         public Fornecedor(decimal capital, int userId)
         {
             Capital = capital;
             UserId = userId;
+
+            _validador = new FornecedorValidator();
         }
 
         public decimal Capital { get; private set; }
@@ -21,5 +29,9 @@
         {
             Capital = novoCapital;
         }
+        
+        public ValidationResult Validar() => _validador.Validate(this);
+
+        public override bool EhValido() => Validar().IsValid;
     }
 }

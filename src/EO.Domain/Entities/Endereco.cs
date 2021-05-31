@@ -1,9 +1,15 @@
-﻿namespace EO.Domain.Entities
+﻿using EO.Domain.Validations;
+using FluentValidation.Results;
+
+namespace EO.Domain.Entities
 {
     public class Endereco : Entidade
     {
+        private readonly EnderecoValidator _validador;
+
         protected Endereco()
         {
+            _validador = new EnderecoValidator();
         }
 
         public Endereco(
@@ -22,6 +28,8 @@
             Cidade = cidade;
             Estado = estado;
             Pais = pais;
+
+            _validador = new EnderecoValidator();
         }
 
         public string Cep { get; private set; }
@@ -60,5 +68,9 @@
         {
             Pais = novoPais;
         }
+
+        public ValidationResult Validar() => _validador.Validate(this);
+
+        public override bool EhValido() => Validar().IsValid;
     }
 }

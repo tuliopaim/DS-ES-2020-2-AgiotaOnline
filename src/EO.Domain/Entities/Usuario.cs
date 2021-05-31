@@ -1,12 +1,17 @@
 ﻿using EO.Domain.Enums;
+using EO.Domain.Validations;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 
 namespace EO.Domain.Entities
 {
     public class Usuario : IdentityUser<int>
     {
+        private readonly UsuarioValidator _validador;
+
         protected Usuario()
         {
+            _validador = new UsuarioValidator();
         }
 
         public Usuario(string nome, string cpf, string telefone, string chavePix, TipoUsuario tipo)
@@ -16,6 +21,8 @@ namespace EO.Domain.Entities
             Telefone = telefone;
             ChavePix = chavePix;
             Tipo = tipo;
+
+            _validador = new UsuarioValidator();
         }
 
         public string Nome { get; private set; }
@@ -33,5 +40,9 @@ namespace EO.Domain.Entities
         {
             ChavePix = novaChavePix;
         }
+
+        public ValidationResult Validar() => _validador.Validate(this);
+
+        public bool EhValido() => Validar().IsValid;
     }
 }
