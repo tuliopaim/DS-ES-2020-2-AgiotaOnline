@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using EO.Application.Interfaces;
 using EO.Application.ViewModels.InputModels.Usuario;
 using EO.Domain.Entities;

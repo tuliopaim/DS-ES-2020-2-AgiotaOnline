@@ -16,6 +16,7 @@ namespace EO.Infra.Configurations
             builder.Property(x => x.Nome).HasMaxLength(200).IsRequired();
             builder.Property(x => x.Telefone).HasMaxLength(11).IsRequired();
             builder.Property(x => x.Tipo).IsRequired();
+            builder.Property(x => x.ChavePix).HasMaxLength(100).IsRequired();
         }
     }
 }

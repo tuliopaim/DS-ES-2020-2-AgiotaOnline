@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using EO.Domain.Interfaces;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace EO.Infra
 {

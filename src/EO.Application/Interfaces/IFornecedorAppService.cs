@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using EO.Application.ViewModels.InputModels.Usuario;
-using EO.Domain.Entities;
 
 namespace EO.Application.Interfaces
 {

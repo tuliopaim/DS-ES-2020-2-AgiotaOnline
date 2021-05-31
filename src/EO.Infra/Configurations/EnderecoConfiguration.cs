@@ -14,6 +14,7 @@ namespace EO.Infra.Configurations
             builder.Property(x => x.Logradouro).HasMaxLength(250).IsRequired();
             builder.Property(x => x.Rua).HasMaxLength(250).IsRequired();
             builder.Property(x => x.Bairro).HasMaxLength(250).IsRequired();
+            builder.Property(x => x.Cidade).HasMaxLength(100).IsRequired();
             builder.Property(x => x.Estado).HasMaxLength(25).IsRequired();
             builder.Property(x => x.Pais).HasMaxLength(25).IsRequired();
         }
