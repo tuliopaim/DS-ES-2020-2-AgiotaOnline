@@ -6,7 +6,12 @@
 <div class="form-row">
     <div class="form-group col-md-6">
         <label asp-for="@Model.Capital"></label>
-        <input asp-for="@Model.Capital" class="form-control" />
+        <div class="input-group ">
+            <div class="input-group-prepend">
+                <span class="input-group-text">R$</span>
+            </div>
+            <input asp-for="@Model.Capital" class="form-control money" />
+        </div>
         <span asp-validation-for="@Model.Capital" class="text-danger"></span>
     </div>
 </div>
