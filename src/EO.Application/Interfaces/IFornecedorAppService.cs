@@ -8,5 +8,6 @@ namespace EO.Application.Interfaces
     {
         void Adicionar(CriarFornecedorViewModel model, int usuarioId);
         Task<EditarFornecedorViewModel> ObterParaEdicao(int usuarioId);
+        Task AtualizarFornecedor(EditarFornecedorViewModel model);
     }
 }

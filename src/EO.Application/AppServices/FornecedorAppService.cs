@@ -25,6 +25,13 @@ namespace EO.Application.AppServices
             return _mapper.Map<EditarFornecedorViewModel>(fornecedor);
         }
 
+        public async Task AtualizarFornecedor(EditarFornecedorViewModel model)
+        {
+            var fornecedor = await _repository.ObterPorId(model.Id, true);
+
+            fornecedor.AlterarCapital(model.Capital);
+        }
+
         public void Adicionar(CriarFornecedorViewModel model, int usuarioId)
         {
             var fornecedor = new Fornecedor(model.Capital, usuarioId);

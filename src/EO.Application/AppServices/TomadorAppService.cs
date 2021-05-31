@@ -20,9 +20,18 @@ namespace EO.Application.AppServices
 
         public async Task<EditarTomadorViewModel> ObterParaEdicao(int usuarioId)
         {
-            var fornecedor = await _repository.ObterPorUsuarioId(usuarioId);
+            var tomador = await _repository.ObterPorUsuarioIdCompleto(usuarioId, true);
 
-            return _mapper.Map<EditarTomadorViewModel>(fornecedor);
+            return _mapper.Map<EditarTomadorViewModel>(tomador);
+        }
+
+        public async Task AtualizarTomador(EditarTomadorViewModel model)
+        {
+            var tomador = await _repository.ObterPorIdCompleto(model.Id, true);
+            
+            tomador.AlterarRendaMensal(model.RendaMensal);
+
+            tomador.AlterarEndereco(_mapper.Map<Endereco>(model.Endereco));
         }
 
         public void Adicionar(CriarTomadorViewModel model, int usuarioId)

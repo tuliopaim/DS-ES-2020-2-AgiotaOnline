@@ -8,5 +8,6 @@ namespace EO.Application.Interfaces
     {
         void Adicionar(CriarTomadorViewModel model, int usuarioId);
         Task<EditarTomadorViewModel> ObterParaEdicao(int usuarioId);
+        Task AtualizarTomador(EditarTomadorViewModel model);
     }
 }

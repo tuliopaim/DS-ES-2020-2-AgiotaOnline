@@ -124,7 +124,16 @@ namespace EO.Application.AppServices
             user.AlterarTelefone(model.Telefone);
             user.AlterarChavePix(model.ChavePix);
 
-            await _userRepository.Atualizar(user);
+            if (user.Tipo == TipoUsuario.Fornecedor)
+            {
+                await _fornecedorAppService.AtualizarFornecedor(model.Fornecedor);
+            }
+            else
+            {
+                await _tomadorAppService.AtualizarTomador(model.Tomador);
+            }
+
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }
