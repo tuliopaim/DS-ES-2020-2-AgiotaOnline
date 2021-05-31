@@ -23,7 +23,7 @@ namespace EO.Infra.Repositories
             return await query.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task Atualizar(User user)
+        public void Atualizar(User user)
         {
             if (_context.Entry(user).State == EntityState.Detached)
             {
@@ -31,8 +31,6 @@ namespace EO.Infra.Repositories
             }
 
             _context.Entry(user).State = EntityState.Modified;
-
-            await _context.SaveChangesAsync();
         }
     }
 }
