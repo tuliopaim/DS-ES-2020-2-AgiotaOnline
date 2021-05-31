@@ -20,9 +20,11 @@
             <span asp-validation-for="@Model.ChavePix" class="text-danger"></span>
         </div>
     </div>
-    
+
     @if (Model.Tipo == TipoUsuario.Fornecedor)
     {
+        <input asp-for="Fornecedor.Id" type="hidden" />
+
         <div id="div-fornecedor" class="mb-2">
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -35,6 +37,8 @@
     }
     else
     {
+        <input asp-for="Tomador.Id" type="hidden" />
+
         <div id="div-tomador" class="mb-2">
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -89,8 +93,7 @@
 
         </div>
     }
-    
-    
+
     <button type="submit" class="btn btn-primary">Alterar</button>
 
 </form>
