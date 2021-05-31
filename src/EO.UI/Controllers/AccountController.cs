@@ -132,7 +132,7 @@ namespace EO.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> EditarPerfil(EditarUsuarioViewModel model)
         {
-            if (!ModelState.IsValid) return View("Perfil", model);
+            if (!ModelState.IsValid) return View("Editar", model);
 
             await _userAppService.AtualizarUsuario(model);
 
