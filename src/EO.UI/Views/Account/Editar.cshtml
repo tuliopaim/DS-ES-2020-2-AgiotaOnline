@@ -7,6 +7,12 @@
 
 <form id="perfil" method="post" asp-action="EditarPerfil">
     <input asp-for="Id" type="hidden" />
+    
+    <div class="mb-3">
+        <a asp-action="AlterarSenha" class="btn btn-primary">Alterar Senha</a>
+    </div>
+    
+    <hr/>
 
     <div class="form-row">
         <div class="form-group col-md-6">
