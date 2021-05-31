@@ -17,7 +17,7 @@ namespace EO.Infra.Repositories
 
         public async Task<Tomador> ObterPorUsuarioIdCompleto(int id, bool track = false)
         {
-            return await BuildQuery(x => x.UserId == id, track: track)
+            return await BuildQuery(x => x.UsuarioId == id, track: track)
                 .Include(x => x.Endereco)
                 .FirstOrDefaultAsync();
         }

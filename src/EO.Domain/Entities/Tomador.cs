@@ -12,10 +12,10 @@ namespace EO.Domain.Entities
             _validador = new TomadorValidator();
         }
 
-        public Tomador(decimal rendaMensal, int userId, Endereco endereco)
+        public Tomador(decimal rendaMensal, int usuarioId, Endereco endereco)
         {
             RendaMensal = rendaMensal;
-            UserId = userId;
+            UsuarioId = usuarioId;
             Endereco = endereco;
 
             _validador = new TomadorValidator();
@@ -26,7 +26,7 @@ namespace EO.Domain.Entities
         public int EnderecoId { get; set; }
         public Endereco Endereco { get; set; }
 
-        public int UserId { get; private set; }
+        public int UsuarioId { get; private set; }
         public Usuario Usuario { get; set; }
 
         public void AlterarRendaMensal(decimal novaRenda)

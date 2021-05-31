@@ -12,17 +12,17 @@ namespace EO.Domain.Entities
             _validador = new FornecedorValidator();
         }
 
-        public Fornecedor(decimal capital, int userId)
+        public Fornecedor(decimal capital, int usuarioId)
         {
             Capital = capital;
-            UserId = userId;
+            UsuarioId = usuarioId;
 
             _validador = new FornecedorValidator();
         }
 
         public decimal Capital { get; private set; }
 
-        public int UserId { get; private set; }
+        public int UsuarioId { get; private set; }
         public Usuario Usuario { get; set; }
 
         public void AlterarCapital(decimal novoCapital)
