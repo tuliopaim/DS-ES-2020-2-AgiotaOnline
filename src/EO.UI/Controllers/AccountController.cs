@@ -10,14 +10,14 @@ namespace EO.UI.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly SignInManager<User> _signInManager;
+        private readonly SignInManager<Usuario> _signInManager;
         private readonly ILogger<AccountController> _logger;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<Usuario> _userManager;
         private readonly IUserAppService _userAppService;
 
         public AccountController(
-            SignInManager<User> signInManager,
-            UserManager<User> userManager,
+            SignInManager<Usuario> signInManager,
+            UserManager<Usuario> userManager,
             ILogger<AccountController> logger,
             IUserAppService userAppService)
         {

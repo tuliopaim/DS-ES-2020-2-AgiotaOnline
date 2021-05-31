@@ -5,7 +5,7 @@ namespace EO.Domain.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User> ObterPorId(int id, bool track = false);
-        void Atualizar(User user);
+        Task<Usuario> ObterPorId(int id, bool track = false);
+        void Atualizar(Usuario usuario);
     }
 }

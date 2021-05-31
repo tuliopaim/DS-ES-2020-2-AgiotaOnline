@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Identity;
 
 namespace EO.Domain.Entities
 {
-    public class User : IdentityUser<int>
+    public class Usuario : IdentityUser<int>
     {
-        protected User()
+        protected Usuario()
         {
         }
 
-        public User(string nome, string cpf, string telefone, string chavePix, TipoUsuario tipo)
+        public Usuario(string nome, string cpf, string telefone, string chavePix, TipoUsuario tipo)
         {
             Nome = nome;
             Cpf = cpf;

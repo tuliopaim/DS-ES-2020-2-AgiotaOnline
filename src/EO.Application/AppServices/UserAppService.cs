@@ -13,16 +13,16 @@ namespace EO.Application.AppServices
     public class UserAppService : IUserAppService
     {
         private readonly IUserRepository _userRepository;
-        private readonly SignInManager<User> _signInManager;
-        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<Usuario> _signInManager;
+        private readonly UserManager<Usuario> _userManager;
         private readonly IFornecedorAppService _fornecedorAppService;
         private readonly ITomadorAppService _tomadorAppService;
         private readonly IUnitOfWork _unitOfWork;
 
         public UserAppService(
             IUserRepository userRepository,
-            SignInManager<User> signInManager,
-            UserManager<User> userManager,
+            SignInManager<Usuario> signInManager,
+            UserManager<Usuario> userManager,
             IFornecedorAppService fornecedorAppService,
             ITomadorAppService tomadorAppService,
             IUnitOfWork unitOfWork)
@@ -41,7 +41,7 @@ namespace EO.Application.AppServices
 
             try
             {
-                var user = new User(
+                var user = new Usuario(
                     model.Nome,
                     model.Cpf,
                     model.Telefone,
@@ -68,28 +68,28 @@ namespace EO.Application.AppServices
             }
         }
 
-        private async Task<IdentityResult> CriarUsuarioIdentity(CriarUsuarioViewModel model, User user)
+        private async Task<IdentityResult> CriarUsuarioIdentity(CriarUsuarioViewModel model, Usuario usuario)
         {
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(usuario, model.Password);
             if (!result.Succeeded) return result;
 
-            await _userManager.AddClaimAsync(user, new Claim(nameof(user.Nome), user.Nome));
-            await _userManager.AddClaimAsync(user, new Claim("TipoUsuario", user.Tipo.ToString()));
+            await _userManager.AddClaimAsync(usuario, new Claim(nameof(usuario.Nome), usuario.Nome));
+            await _userManager.AddClaimAsync(usuario, new Claim("TipoUsuario", usuario.Tipo.ToString()));
 
-            await _signInManager.SignInAsync(user, true);
+            await _signInManager.SignInAsync(usuario, true);
             
             return result;
         }
 
-        private void CriarUsuarioEspecifico(CriarUsuarioViewModel model, User user)
+        private void CriarUsuarioEspecifico(CriarUsuarioViewModel model, Usuario usuario)
         {
             if (model.TipoUsuario == TipoUsuario.Fornecedor)
             {
-                _fornecedorAppService.Adicionar(model.Fornecedor, user.Id);
+                _fornecedorAppService.Adicionar(model.Fornecedor, usuario.Id);
             }
             else
             {
-                _tomadorAppService.Adicionar(model.Tomador, user.Id);
+                _tomadorAppService.Adicionar(model.Tomador, usuario.Id);
             }
         }
 

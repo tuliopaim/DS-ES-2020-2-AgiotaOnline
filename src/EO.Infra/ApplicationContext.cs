@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EO.Infra
 {
-    public class ApplicationContext : IdentityDbContext<User, IdentityRole<int>, int>
+    public class ApplicationContext : IdentityDbContext<Usuario, IdentityRole<int>, int>
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {

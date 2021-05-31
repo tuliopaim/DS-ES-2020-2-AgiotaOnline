@@ -14,7 +14,7 @@ namespace EO.UI
     {
         public static void InjetarIdentity(this IServiceCollection services)
         {
-            services.AddDefaultIdentity<User>(options =>
+            services.AddDefaultIdentity<Usuario>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = false;

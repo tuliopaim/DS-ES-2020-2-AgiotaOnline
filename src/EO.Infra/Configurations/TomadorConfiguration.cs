@@ -13,7 +13,7 @@ namespace EO.Infra.Configurations
             builder.Property(x => x.RendaMensal).IsRequired();
 
             builder.HasOne(x => x.Endereco);
-            builder.HasOne(x => x.User);
+            builder.HasOne(x => x.Usuario);
         }
     }
 }

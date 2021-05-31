@@ -11,7 +11,7 @@ namespace EO.Infra.Configurations
             builder.ToTable("Fornecedores");
 
             builder.Property(x => x.Capital).HasMaxLength(11).IsRequired();
-            builder.HasOne(x => x.User);
+            builder.HasOne(x => x.Usuario);
         }
     }
 }

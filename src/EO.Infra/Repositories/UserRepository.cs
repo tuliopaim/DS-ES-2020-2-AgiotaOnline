@@ -14,7 +14,7 @@ namespace EO.Infra.Repositories
             _context = context;
         }
         
-        public async Task<User> ObterPorId(int id, bool track = false)
+        public async Task<Usuario> ObterPorId(int id, bool track = false)
         {
             var query = _context.Users.AsQueryable();
 
@@ -23,14 +23,14 @@ namespace EO.Infra.Repositories
             return await query.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public void Atualizar(User user)
+        public void Atualizar(Usuario usuario)
         {
-            if (_context.Entry(user).State == EntityState.Detached)
+            if (_context.Entry(usuario).State == EntityState.Detached)
             {
-                _context.Users.Attach(user);
+                _context.Users.Attach(usuario);
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(usuario).State = EntityState.Modified;
         }
     }
 }
