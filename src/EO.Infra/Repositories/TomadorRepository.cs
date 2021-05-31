@@ -15,9 +15,16 @@ namespace EO.Infra.Repositories
             _context = context;
         }
 
-        public async Task<Tomador> ObterPorUsuarioId(int id, bool track = false)
+        public async Task<Tomador> ObterPorUsuarioIdCompleto(int id, bool track = false)
         {
-            return await BuildQuery(x => x.UserId == id)
+            return await BuildQuery(x => x.UserId == id, track: track)
+                .Include(x => x.Endereco)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Tomador> ObterPorIdCompleto(int id, bool track = false)
+        {
+            return await BuildQuery(x => x.Id == id, track: track)
                 .Include(x => x.Endereco)
                 .FirstOrDefaultAsync();
         }

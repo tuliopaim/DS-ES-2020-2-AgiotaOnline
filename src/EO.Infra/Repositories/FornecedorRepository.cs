@@ -20,5 +20,11 @@ namespace EO.Infra.Repositories
             return await BuildQuery(x => x.UserId == id, track: track)
                 .Include(x => x).FirstOrDefaultAsync();
         }
+
+        public async Task<Fornecedor> ObterPorId(int id, bool track = false)
+        {
+            return await BuildQuery(x => x.Id == id, track: track)
+                .Include(x => x).FirstOrDefaultAsync();
+        }
     }
 }
