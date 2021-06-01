@@ -1,4 +1,5 @@
-﻿using EO.Domain.Enums;
+﻿using EO.Domain.Core;
+using EO.Domain.Enums;
 using EO.Domain.Validations;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
@@ -17,9 +18,9 @@ namespace EO.Domain.Entities
         public Usuario(string nome, string cpf, string telefone, string chavePix, TipoUsuario tipo)
         {
             Nome = nome;
-            Cpf = cpf;
-            Telefone = telefone;
-            ChavePix = chavePix;
+            Cpf = Helper.SemFormatacao(cpf);
+            Telefone = Helper.SemFormatacao(telefone);
+            ChavePix = Helper.SemFormatacao(chavePix);
             Tipo = tipo;
 
             _validador = new UsuarioValidator();

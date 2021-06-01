@@ -1,4 +1,5 @@
-﻿using EO.Domain.Validations;
+﻿using EO.Domain.Core;
+using EO.Domain.Validations;
 using FluentValidation.Results;
 
 namespace EO.Domain.Entities
@@ -42,7 +43,7 @@ namespace EO.Domain.Entities
 
         public void AlterarCep(string novoCep)
         {
-            Cep = novoCep;
+            Cep = Helper.SemFormatacao(novoCep);
         }
         public void AlterarLogradouro(string novoLogradouro)
         {
