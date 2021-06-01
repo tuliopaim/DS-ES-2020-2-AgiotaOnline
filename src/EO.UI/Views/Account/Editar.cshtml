@@ -34,8 +34,11 @@
         <div id="div-fornecedor" class="mb-2">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label asp-for="@Model.Fornecedor.Capital"></label>
-                    <input asp-for="@Model.Fornecedor.Capital" class="form-control" />
+                    <label asp-for="@Model.Fornecedor.Capital"></label>            
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">R$</span>
+                    </div>
+                    <input asp-for="@Model.Fornecedor.Capital" class="form-control monetario"/>
                     <span asp-validation-for="@Model.Fornecedor.Capital" class="text-danger"></span>
                 </div>
             </div>
@@ -49,7 +52,10 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label asp-for="@Model.Tomador.RendaMensal"></label>
-                    <input asp-for="@Model.Tomador.RendaMensal" class="form-control" />
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">R$</span>
+                    </div>
+                    <input asp-for="@Model.Tomador.RendaMensal" class="form-control monetario" />
                     <span asp-validation-for="@Model.Tomador.RendaMensal" class="text-danger"></span>
                 </div>
             </div>
