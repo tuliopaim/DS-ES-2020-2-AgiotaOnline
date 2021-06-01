@@ -10,7 +10,7 @@ namespace EO.Application.ViewModels.InputModels.Usuario
 
         [Required(ErrorMessage = "{0} obrigatório(a)")]
         [DisplayName("Renda Mensal")]
-        [DataType(DataType.Currency, ErrorMessage = "Valor inválido!")]
+        [DataType(DataType.Currency)]
         [Range(500, double.MaxValue, ErrorMessage = "Maior ou igual a {1}")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:n2}")]
         public decimal RendaMensal { get; set; }
