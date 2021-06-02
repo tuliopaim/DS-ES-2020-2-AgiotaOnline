@@ -8,6 +8,9 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["EO.UI/EO.UI.csproj", "EO.UI/"]
+COPY ["EO.Domain/EO.Domain.csproj", "EO.Domain/"]
+COPY ["EO.Application/EO.Application.csproj", "EO.Application/"]
+COPY ["EO.Infra/EO.Infra.csproj", "EO.Infra/"]
 RUN dotnet restore "EO.UI/EO.UI.csproj"
 COPY . .
 WORKDIR "/src/EO.UI"

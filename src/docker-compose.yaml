@@ -1,0 +1,28 @@
+version: '3'
+    
+services:      
+  webApp.API:
+    container_name: emprestimosOnline.UI
+    image: emprestimosonline
+    build:
+      context: .
+      dockerfile: EO.UI/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+    ports:
+      - "0.0.0.0:5000:5000"
+    depends_on:
+      - db.database      
+
+  db.database:
+    container_name: emprestimosOnline.db
+    image: postgres
+    restart: always
+    ports:
+      - "0.0.0.0:5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=senh@secret@123
+      - POSTGRES_DB=EO
+    volumes:
+      - /home/docker/pgdata:/var/lib/postgresql/data
