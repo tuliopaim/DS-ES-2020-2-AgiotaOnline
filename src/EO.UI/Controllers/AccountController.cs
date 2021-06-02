@@ -84,7 +84,9 @@ namespace EO.UI.Controllers
             var result = await _userManager.ChangePasswordAsync(user, model.Password, model.NewPassword);
             if (result.Succeeded)
             {
-                return RedirectToAction("Login", "Account");
+                return User.Identity?.IsAuthenticated ?? false
+                    ? RedirectToAction("Index", "Home")
+                    : RedirectToAction("Login", "Account");
             }
 
             foreach (var error in result.Errors)
