@@ -34,12 +34,12 @@ namespace EO.Domain.Entities
 
         public void AlterarTelefone(string novoTelefone)
         {
-            Telefone = novoTelefone;
+            Telefone = Helper.SemFormatacao(novoTelefone);
         }
 
         public void AlterarChavePix(string novaChavePix)
         {
-            ChavePix = novaChavePix;
+            ChavePix = Helper.SemFormatacao(novaChavePix);
         }
 
         public ValidationResult Validar() => _validador.Validate(this);

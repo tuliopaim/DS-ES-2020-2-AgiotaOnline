@@ -22,7 +22,7 @@ namespace EO.Domain.Entities
             string estado,
             string pais)
         {
-            Cep = cep;
+            Cep = Helper.SemFormatacao(cep);
             Logradouro = logradouro;
             Rua = rua;
             Bairro = bairro;
