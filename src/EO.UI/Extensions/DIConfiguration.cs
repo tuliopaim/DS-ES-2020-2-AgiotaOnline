@@ -8,7 +8,7 @@ using EO.Infra;
 using EO.Infra.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EO.UI
+namespace EO.UI.Extensions
 {
     public static class DiConfiguration
     {
