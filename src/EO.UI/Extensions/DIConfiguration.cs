@@ -36,11 +36,11 @@ namespace EO.UI.Extensions
 
         public static void InjetarServicos(this IServiceCollection services)
         {
-            services.AddScoped<IUserAppService, UserAppService>();
+            services.AddScoped<IUsuarioAppService, UsuarioAppService>();
             services.AddScoped<ITomadorAppService, TomadorAppService>();
             services.AddScoped<IFornecedorAppService, FornecedorAppService>();
 
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUsuarioRepository, Infra.Repositories.UsuarioRepository>();
             services.AddScoped<ITomadorRepository, TomadorRepository>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
 

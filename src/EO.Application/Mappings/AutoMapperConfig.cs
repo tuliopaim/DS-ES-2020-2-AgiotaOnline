@@ -11,6 +11,7 @@ namespace EO.Application.Mappings
             return new MapperConfiguration(config =>
             {
                 config.CreateMap<CriarEnderecoViewModel, Endereco>().ReverseMap();
+                config.CreateMap<Usuario, EditarUsuarioViewModel>();
                 config.CreateMap<Fornecedor, EditarFornecedorViewModel>();
                 config.CreateMap<Tomador, EditarTomadorViewModel>();
             });

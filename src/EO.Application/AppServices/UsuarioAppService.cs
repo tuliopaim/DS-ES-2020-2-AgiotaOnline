@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using EO.Application.Interfaces;
 using EO.Application.ViewModels.InputModels.Usuario;
 using EO.Domain.Entities;
@@ -10,29 +11,32 @@ using Microsoft.AspNetCore.Identity;
 
 namespace EO.Application.AppServices
 {
-    public class UserAppService : IUserAppService
+    public class UsuarioAppService : IUsuarioAppService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
         private readonly SignInManager<Usuario> _signInManager;
         private readonly UserManager<Usuario> _userManager;
         private readonly IFornecedorAppService _fornecedorAppService;
         private readonly ITomadorAppService _tomadorAppService;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public UserAppService(
-            IUserRepository userRepository,
+        public UsuarioAppService(
+            IUsuarioRepository usuarioRepository,
             SignInManager<Usuario> signInManager,
             UserManager<Usuario> userManager,
             IFornecedorAppService fornecedorAppService,
             ITomadorAppService tomadorAppService,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            IMapper mapper)
         {
-            _userRepository = userRepository;
+            _usuarioRepository = usuarioRepository;
             _signInManager = signInManager;
             _userManager = userManager;
             _fornecedorAppService = fornecedorAppService;
             _tomadorAppService = tomadorAppService;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<bool> AdicionarUsuario(CriarUsuarioViewModel model)
@@ -95,23 +99,17 @@ namespace EO.Application.AppServices
 
         public async Task<EditarUsuarioViewModel> ObterUsuarioParaEdicao(int id)
         {
-            var user = await _userRepository.ObterPorId(id);
+            var usuario = await _usuarioRepository.ObterPorId(id);
 
-            var editarViewModel = new EditarUsuarioViewModel
-            {
-                Id = id,
-                Telefone = user.Telefone,
-                ChavePix = user.ChavePix,
-                Tipo = user.Tipo,
-            };
+            var editarViewModel = _mapper.Map<EditarUsuarioViewModel>(usuario);
 
-            if (user.Tipo == TipoUsuario.Fornecedor)
+            if (usuario.Tipo == TipoUsuario.Fornecedor)
             {
-                editarViewModel.Fornecedor = await _fornecedorAppService.ObterParaEdicao(user.Id);
+                editarViewModel.Fornecedor = await _fornecedorAppService.ObterParaEdicao(usuario.Id);
             }
             else
             {
-                editarViewModel.Tomador = await _tomadorAppService.ObterParaEdicao(user.Id);
+                editarViewModel.Tomador = await _tomadorAppService.ObterParaEdicao(usuario.Id);
             }
 
             return editarViewModel;
@@ -119,13 +117,13 @@ namespace EO.Application.AppServices
 
         public async Task EditarUsuario(EditarUsuarioViewModel model)
         {
-            var user = await _userRepository.ObterPorId(model.Id, true);
+            var usuario = await _usuarioRepository.ObterPorId(model.Id, true);
 
-            user.AlterarNome(model.Nome);
-            user.AlterarTelefone(model.Telefone);
-            user.AlterarChavePix(model.ChavePix);
+            usuario.AlterarNome(model.Nome);
+            usuario.AlterarTelefone(model.Telefone);
+            usuario.AlterarChavePix(model.ChavePix);
 
-            if (user.Tipo == TipoUsuario.Fornecedor)
+            if (usuario.Tipo == TipoUsuario.Fornecedor)
             {
                 await _fornecedorAppService.AtualizarFornecedor(model.Fornecedor);
             }

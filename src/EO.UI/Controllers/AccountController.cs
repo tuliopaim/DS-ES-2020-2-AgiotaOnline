@@ -13,18 +13,18 @@ namespace EO.UI.Controllers
         private readonly SignInManager<Usuario> _signInManager;
         private readonly ILogger<AccountController> _logger;
         private readonly UserManager<Usuario> _userManager;
-        private readonly IUserAppService _userAppService;
+        private readonly IUsuarioAppService _usuarioAppService;
 
         public AccountController(
             SignInManager<Usuario> signInManager,
             UserManager<Usuario> userManager,
             ILogger<AccountController> logger,
-            IUserAppService userAppService)
+            IUsuarioAppService usuarioAppService)
         {
             _signInManager = signInManager;
             _logger = logger;
             _userManager = userManager;
-            _userAppService = userAppService;
+            _usuarioAppService = usuarioAppService;
         }
 
         [HttpGet]
@@ -60,7 +60,7 @@ namespace EO.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarUsuario(CriarUsuarioViewModel model)
         {
-            var result = await _userAppService.AdicionarUsuario(model);
+            var result = await _usuarioAppService.AdicionarUsuario(model);
 
             if (result)
             {
@@ -110,7 +110,7 @@ namespace EO.UI.Controllers
         {
             var id = ObterIdUsuarioLogado();
 
-            var model = await _userAppService.ObterUsuarioParaEdicao(id);
+            var model = await _usuarioAppService.ObterUsuarioParaEdicao(id);
 
             return View(model);
         }
@@ -120,7 +120,7 @@ namespace EO.UI.Controllers
         {
             if (!ModelState.IsValid) return View("Editar", model);
 
-            await _userAppService.EditarUsuario(model);
+            await _usuarioAppService.EditarUsuario(model);
 
             return RedirectToAction("Index", "Home");
         }

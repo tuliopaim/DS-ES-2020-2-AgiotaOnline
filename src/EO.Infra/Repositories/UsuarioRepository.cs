@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EO.Infra.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UsuarioRepository : IUsuarioRepository
     {
         private readonly ApplicationContext _context;
 
-        public UserRepository(ApplicationContext context)
+        public UsuarioRepository(ApplicationContext context)
         {
             _context = context;
         }
