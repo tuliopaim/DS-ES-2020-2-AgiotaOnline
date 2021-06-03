@@ -1,7 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using EO.UI.Extensions
+
+@{
+    ViewData["Title"] = "Home";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Bem vindo ao Empréstimos Online</h1>
+    <h1 class="display-4">Bem vindo, @User.Nome()</h1>
 </div>

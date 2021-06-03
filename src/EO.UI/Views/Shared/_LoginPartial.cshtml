@@ -1,15 +1,16 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using EO.Domain.Entities
+@using EO.UI.Extensions
 
 @inject SignInManager<Usuario> _signInManager
 @inject UserManager<Usuario> _userManager
 
 <ul class="navbar-nav">
-@if (_signInManager.IsSignedIn(User))
+@if (User.Identity!.IsAuthenticated)
 {
     <li class="nav-item">
         <a id="manage" class="nav-link text-dark" asp-controller="Account" asp-action="Editar" title="Perfil">
-            Ola, @_userManager.GetUserName(User)!
+            Ola, @User.PrimeiroNome()
         </a>
     </li>
     <li class="nav-item">
