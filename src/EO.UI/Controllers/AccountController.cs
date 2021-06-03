@@ -120,7 +120,7 @@ namespace EO.UI.Controllers
         {
             if (!ModelState.IsValid) return View("Editar", model);
 
-            await _userAppService.AtualizarUsuario(model);
+            await _userAppService.EditarUsuario(model);
 
             return RedirectToAction("Index", "Home");
         }

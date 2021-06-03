@@ -32,6 +32,11 @@ namespace EO.Domain.Entities
         public string ChavePix { get; private set; }
         public TipoUsuario Tipo { get; private set; }
 
+        public void AlterarNome(string novoNome)
+        {
+            Nome = novoNome;
+        }
+
         public void AlterarTelefone(string novoTelefone)
         {
             Telefone = Helper.SemFormatacao(novoTelefone);

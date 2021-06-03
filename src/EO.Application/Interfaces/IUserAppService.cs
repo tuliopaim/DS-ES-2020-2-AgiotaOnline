@@ -9,6 +9,6 @@ namespace EO.Application.Interfaces
 
         Task<EditarUsuarioViewModel> ObterUsuarioParaEdicao(int id);
 
-        Task AtualizarUsuario(EditarUsuarioViewModel model);
+        Task EditarUsuario(EditarUsuarioViewModel model);
     }
 }

@@ -117,10 +117,11 @@ namespace EO.Application.AppServices
             return editarViewModel;
         }
 
-        public async Task AtualizarUsuario(EditarUsuarioViewModel model)
+        public async Task EditarUsuario(EditarUsuarioViewModel model)
         {
             var user = await _userRepository.ObterPorId(model.Id, true);
 
+            user.AlterarNome(model.Nome);
             user.AlterarTelefone(model.Telefone);
             user.AlterarChavePix(model.ChavePix);
 
