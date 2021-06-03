@@ -1,4 +1,6 @@
-﻿using EO.Domain.Validations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using EO.Domain.Validations;
 using FluentValidation.Results;
 
 namespace EO.Domain.Entities
@@ -6,19 +8,19 @@ namespace EO.Domain.Entities
     public class Tomador : Entidade
     {
         private readonly TomadorValidator _validador;
-
+        private List<SolicitacaoEmprestimo> _solicitacoes;
+        
         protected Tomador()
         {
             _validador = new TomadorValidator();
+            _solicitacoes = new List<SolicitacaoEmprestimo>();
         }
 
-        public Tomador(decimal rendaMensal, int usuarioId, Endereco endereco)
+        public Tomador(decimal rendaMensal, int usuarioId, Endereco endereco) : this()
         {
             RendaMensal = rendaMensal;
             UsuarioId = usuarioId;
             Endereco = endereco;
-
-            _validador = new TomadorValidator();
         }
 
         public decimal RendaMensal { get; private set; }
@@ -28,6 +30,8 @@ namespace EO.Domain.Entities
 
         public int UsuarioId { get; private set; }
         public Usuario Usuario { get; set; }
+
+        public IReadOnlyCollection<SolicitacaoEmprestimo> Solicitacoes => _solicitacoes;
 
         public void AlterarRendaMensal(decimal novaRenda)
         {

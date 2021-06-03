@@ -3,15 +3,17 @@ using System;
 using EO.Infra;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace EO.Infra.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20210603020712_AdicionaSolicitacaoEmprestimo")]
+    partial class AdicionaSolicitacaoEmprestimo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,10 +112,7 @@ namespace EO.Infra.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("character varying(25)");
 
-                    b.Property<Guid>("TomadorId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int?>("TomadorId1")
+                    b.Property<int?>("TomadorId")
                         .HasColumnType("integer");
 
                     b.Property<decimal>("Valor")
@@ -121,7 +120,7 @@ namespace EO.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TomadorId1");
+                    b.HasIndex("TomadorId");
 
                     b.ToTable("SolicitacaoEmprestimo");
                 });
@@ -391,7 +390,7 @@ namespace EO.Infra.Migrations
                 {
                     b.HasOne("EO.Domain.Entities.Tomador", null)
                         .WithMany("Solicitacoes")
-                        .HasForeignKey("TomadorId1");
+                        .HasForeignKey("TomadorId");
                 });
 
             modelBuilder.Entity("EO.Domain.Entities.Tomador", b =>
