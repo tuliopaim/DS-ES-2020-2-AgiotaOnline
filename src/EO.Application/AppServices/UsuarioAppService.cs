@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using AutoMapper;
 using EO.Application.Interfaces;
@@ -117,9 +119,15 @@ namespace EO.Application.AppServices
 
         public async Task EditarUsuario(EditarUsuarioViewModel model)
         {
-            var usuario = await _usuarioRepository.ObterPorId(model.Id, true);
+            var usuario = await _userManager.FindByIdAsync(model.Id.ToString());
 
-            usuario.AlterarNome(model.Nome);
+            if (usuario.Nome != model.Nome)
+            {
+                usuario.AlterarNome(model.Nome);
+
+                await AtualizarClaimNome(usuario);
+            }
+
             usuario.AlterarTelefone(model.Telefone);
             usuario.AlterarChavePix(model.ChavePix);
 
@@ -133,6 +141,22 @@ namespace EO.Application.AppServices
             }
 
             await _unitOfWork.SaveChangesAsync();
+
+            await _signInManager.RefreshSignInAsync(usuario);
+        }
+
+        private async Task AtualizarClaimNome(Usuario usuario)
+        {
+            var claims = await _userManager.GetClaimsAsync(usuario);
+            var claimNome = claims.FirstOrDefault(c => c.Type == nameof(usuario.Nome));
+
+            if (claimNome is null)
+            {
+                await _userManager.AddClaimAsync(usuario, new Claim(nameof(usuario.Nome), usuario.Nome));
+                return;
+            }
+
+            await _userManager.ReplaceClaimAsync(usuario, claimNome, new Claim(claimNome.Type, usuario.Nome));
         }
     }
 }
