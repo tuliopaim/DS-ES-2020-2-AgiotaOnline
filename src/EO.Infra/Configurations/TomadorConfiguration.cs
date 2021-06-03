@@ -10,10 +10,13 @@ namespace EO.Infra.Configurations
         {
             builder.ToTable("Tomadores");
 
-            builder.Property(x => x.RendaMensal).IsRequired();
+            builder.Property(x => x.RendaMensal)
+                .IsRequired()
+                .HasColumnType("decima(18,2)");
 
             builder.HasOne(x => x.Endereco);
             builder.HasOne(x => x.Usuario);
+            builder.HasMany(x => x.Solicitacoes);
         }
     }
 }

@@ -10,7 +10,10 @@ namespace EO.Infra.Configurations
         {
             builder.ToTable("Fornecedores");
 
-            builder.Property(x => x.Capital).HasMaxLength(11).IsRequired();
+            builder.Property(x => x.Capital)
+                .IsRequired()
+                .HasColumnType("decima(18,2)");
+
             builder.HasOne(x => x.Usuario);
         }
     }
