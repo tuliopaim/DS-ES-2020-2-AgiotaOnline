@@ -1,6 +1,8 @@
-﻿namespace EO.Domain.Interfaces
+﻿using EO.Domain.Entities;
+
+namespace EO.Domain.Interfaces
 {
-    public interface ISolicitacaoEmprestimoRepository
+    public interface ISolicitacaoEmprestimoRepository : IGenericRepository<SolicitacaoEmprestimo>
     {
         
     }
