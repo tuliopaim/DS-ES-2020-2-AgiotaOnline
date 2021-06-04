@@ -2,6 +2,7 @@
 using EO.Application.Interfaces;
 using EO.Application.ViewModels.InputModels.Usuario;
 using EO.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -28,12 +29,14 @@ namespace EO.UI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> RealizarLogin(LoginViewModel model)
         {
             if (!ModelState.IsValid) return View("Login", model);
@@ -52,12 +55,14 @@ namespace EO.UI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Registrar()
         {
             return View(new CriarUsuarioViewModel());
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> RegistrarUsuario(CriarUsuarioViewModel model)
         {
             var result = await _usuarioAppService.AdicionarUsuario(model);
@@ -71,12 +76,14 @@ namespace EO.UI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult AlterarSenha()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> RealizarTrocaDeSenha(TrocarSenhaViewModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -98,6 +105,7 @@ namespace EO.UI.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> RealizarLogout()
         {
             await _signInManager.SignOutAsync();

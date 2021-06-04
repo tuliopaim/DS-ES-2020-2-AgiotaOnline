@@ -2,10 +2,12 @@
 using System.Linq;
 using System.Security.Claims;
 using EO.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EO.UI.Controllers
 {
+    [Authorize]
     public class BaseController : Controller
     {
         public string ObterNomeUsuarioLogado()
