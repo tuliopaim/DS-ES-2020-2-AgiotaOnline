@@ -10,5 +10,7 @@ namespace EO.Domain.Interfaces
         Task<Tomador> ObterPorIdCompleto(int id, bool track = false);
 
         Task<Tomador> ObterPorIdComEndereco(int id, bool track = false);
+
+        Task<int> ObterIdPorUsuarioId(int usuarioId);
     }
 }

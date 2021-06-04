@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using EO.Domain.Entities;
 using EO.Domain.Interfaces;
 using EO.Infra.Repositories.Base;
@@ -35,6 +36,14 @@ namespace EO.Infra.Repositories
             return await BuildQuery(x => x.Id == id, track: track)
                 .Include(x => x.Endereco)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<int> ObterIdPorUsuarioId(int usuarioId)
+        {
+            return await _context.Tomadores
+                .AsNoTracking()
+                .Where(x => x.UsuarioId == usuarioId)
+                .Select(x => x.Id).FirstOrDefaultAsync();
         }
     }
 }
