@@ -26,12 +26,12 @@ namespace EO.UI.Controllers
 
         private async Task<IActionResult> Tomador()
         {
-            return View();
+            return View("Tomador");
         }
 
         private async Task<IActionResult> Fornecedor()
         {
-            return View();
+            return View("Fornecedor");
         }
 
         public IActionResult Privacy()
