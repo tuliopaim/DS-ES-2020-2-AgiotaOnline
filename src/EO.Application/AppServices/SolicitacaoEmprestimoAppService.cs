@@ -15,19 +15,22 @@ namespace EO.Application.AppServices
 
         public SolicitacaoEmprestimoAppService(
             ISolicitacaoEmprestimoRepository repository,
-            ITomadorRepository tomadorRepository,
-            IUnitOfWork uow)
+            IUnitOfWork uow, ITomadorRepository tomadorRepository)
         {
             _repository = repository;
-            _tomadorRepository = tomadorRepository;
             _uow = uow;
+            _tomadorRepository = tomadorRepository;
         }
 
 
         public async Task<ValidationResult> Adicionar(CriarSolicitacaoEmprestimo model)
         {
-            var solicitacao = new SolicitacaoEmprestimo(model.Valor, model.Parcelas);
-            
+            var tomadorId = await _tomadorRepository.ObterIdPorUsuarioId(model.UsuarioId);
+
+            var solicitacao = new SolicitacaoEmprestimo(model.Valor, model.Parcelas, tomadorId);
+
+            if (!solicitacao.EhValido()) return solicitacao.Validar();
+
             _repository.Add(solicitacao);
 
             await _uow.SaveChangesAsync();

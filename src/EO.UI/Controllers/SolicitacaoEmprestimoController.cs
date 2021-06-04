@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using EO.Application.Interfaces;
 using EO.Application.ViewModels.InputModels.SolicitacaoEmprestimo;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EO.UI.Controllers
@@ -23,9 +24,13 @@ namespace EO.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarSolicitacao(CriarSolicitacaoEmprestimo model)
         {
-            model.TomadorId = ObterIdUsuarioLogado();
+            model.UsuarioId = ObterIdUsuarioLogado();
 
-            await _appService.Adicionar(model);
+            var result = await _appService.Adicionar(model);
+
+            if(result.IsValid) return RedirectToAction("Index", "Home");
+
+            result.AddToModelState(ModelState, "");
 
             return View("Criar");
         }

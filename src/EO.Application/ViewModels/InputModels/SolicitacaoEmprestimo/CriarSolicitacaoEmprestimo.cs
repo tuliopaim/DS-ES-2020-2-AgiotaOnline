@@ -6,7 +6,7 @@ namespace EO.Application.ViewModels.InputModels.SolicitacaoEmprestimo
 {
     public class CriarSolicitacaoEmprestimo
     {
-        public int TomadorId { get; set; }
+        public int UsuarioId { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório(a)")]
         [DisplayName("Valor Solicitado")]
