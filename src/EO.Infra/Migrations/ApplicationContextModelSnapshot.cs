@@ -110,10 +110,7 @@ namespace EO.Infra.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("character varying(25)");
 
-                    b.Property<Guid>("TomadorId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int?>("TomadorId1")
+                    b.Property<int>("TomadorId")
                         .HasColumnType("integer");
 
                     b.Property<decimal>("Valor")
@@ -121,7 +118,7 @@ namespace EO.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TomadorId1");
+                    b.HasIndex("TomadorId");
 
                     b.ToTable("SolicitacaoEmprestimo");
                 });
@@ -391,7 +388,9 @@ namespace EO.Infra.Migrations
                 {
                     b.HasOne("EO.Domain.Entities.Tomador", null)
                         .WithMany("Solicitacoes")
-                        .HasForeignKey("TomadorId1");
+                        .HasForeignKey("TomadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EO.Domain.Entities.Tomador", b =>

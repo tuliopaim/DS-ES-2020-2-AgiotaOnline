@@ -16,7 +16,7 @@ namespace EO.Domain.Entities
         public int Parcelas { get; private set; }  
         public StatusSolicitacao Status { get; private set; }
 
-        public Guid TomadorId { get; set; }
+        public int TomadorId { get; set; }
 
         public void ConcluirSolicitacao()
         {

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EO.Infra.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210531020908_AlteraColunaUsuarioId")]
-    partial class AlteraColunaUsuarioId
+    [Migration("20210604202053_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -79,8 +79,7 @@ namespace EO.Infra.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<decimal>("Capital")
-                        .HasMaxLength(11)
-                        .HasColumnType("numeric");
+                        .HasColumnType("numeric(18,2)");
 
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("timestamp without time zone");
@@ -93,6 +92,37 @@ namespace EO.Infra.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Fornecedores");
+                });
+
+            modelBuilder.Entity("EO.Domain.Entities.SolicitacaoEmprestimo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Parcelas")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)");
+
+                    b.Property<int>("TomadorId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("numeric(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TomadorId");
+
+                    b.ToTable("SolicitacaoEmprestimo");
                 });
 
             modelBuilder.Entity("EO.Domain.Entities.Tomador", b =>
@@ -109,7 +139,7 @@ namespace EO.Infra.Migrations
                         .HasColumnType("integer");
 
                     b.Property<decimal>("RendaMensal")
-                        .HasColumnType("numeric");
+                        .HasColumnType("numeric(18,2)");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("integer");
@@ -356,6 +386,15 @@ namespace EO.Infra.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("EO.Domain.Entities.SolicitacaoEmprestimo", b =>
+                {
+                    b.HasOne("EO.Domain.Entities.Tomador", null)
+                        .WithMany("Solicitacoes")
+                        .HasForeignKey("TomadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EO.Domain.Entities.Tomador", b =>
                 {
                     b.HasOne("EO.Domain.Entities.Endereco", "Endereco")
@@ -424,6 +463,11 @@ namespace EO.Infra.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EO.Domain.Entities.Tomador", b =>
+                {
+                    b.Navigation("Solicitacoes");
                 });
 #pragma warning restore 612, 618
         }
