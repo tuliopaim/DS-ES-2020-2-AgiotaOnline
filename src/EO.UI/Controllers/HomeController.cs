@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
 namespace EO.UI.Controllers
@@ -16,7 +17,19 @@ namespace EO.UI.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
+        {
+            return EhTomador()
+                ? await Tomador()
+                : await Fornecedor();
+        }
+
+        private async Task<IActionResult> Tomador()
+        {
+            return View();
+        }
+
+        private async Task<IActionResult> Fornecedor()
         {
             return View();
         }
