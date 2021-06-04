@@ -39,10 +39,12 @@ namespace EO.UI.Extensions
             services.AddScoped<IUsuarioAppService, UsuarioAppService>();
             services.AddScoped<ITomadorAppService, TomadorAppService>();
             services.AddScoped<IFornecedorAppService, FornecedorAppService>();
+            services.AddScoped<ISolicitacaoEmprestimoAppService, SolicitacaoEmprestimoAppService>();
 
-            services.AddScoped<IUsuarioRepository, Infra.Repositories.UsuarioRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ITomadorRepository, TomadorRepository>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+            services.AddScoped<ISolicitacaoEmprestimoRepository, SolicitacaoEmprestimoRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
