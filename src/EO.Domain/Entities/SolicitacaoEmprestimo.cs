@@ -1,14 +1,24 @@
 ﻿using System;
 using EO.Domain.Enums;
+using EO.Domain.Validations;
+using FluentValidation.Results;
 
 namespace EO.Domain.Entities
 {
     public class SolicitacaoEmprestimo : Entidade
     {
-        public SolicitacaoEmprestimo(decimal valor, int parcelas)
+        private readonly SolicitacaoEmprestimoValidator _validador;
+
+        protected SolicitacaoEmprestimo()
+        {
+            _validador = new SolicitacaoEmprestimoValidator();
+        }
+
+        public SolicitacaoEmprestimo(decimal valor, int parcelas, int tomadorId) : this()
         {
             Valor = valor;
             Parcelas = parcelas;
+            TomadorId = tomadorId;
             Status = StatusSolicitacao.Pendente;
         }
 
@@ -27,5 +37,9 @@ namespace EO.Domain.Entities
         {
             Status = StatusSolicitacao.Cancelada;
         }
+
+        public ValidationResult Validar() => _validador.Validate(this);
+
+        public override bool EhValido() => Validar().IsValid;
     }
 }

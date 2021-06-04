@@ -58,8 +58,6 @@ namespace EO.Application.AppServices
                 var result = await CriarUsuarioIdentity(model, user);
                 if (!result.Succeeded) return false;
                 
-                //todo: configurar notificador
-                
                 CriarUsuarioEspecifico(model, user);
 
                 await _unitOfWork.CommitTransaction();
