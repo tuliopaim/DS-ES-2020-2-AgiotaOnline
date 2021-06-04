@@ -1,6 +1,4 @@
 ﻿@using EO.UI.Extensions
-@using EO.Domain.Entities
-@using EO.Domain.Enums
 
 @{
     ViewData["Title"] = "Home";
@@ -8,7 +6,11 @@
 
 <div class="text-center">
     <h1 class="display-4">Bem vindo, @User.NomeCompleto()</h1>
-    
-    <a class="btn btn-primary" asp-controller="SolicitacaoEmprestimo" asp-action="Criar">Criar nova Solicitação</a>
+</div>
 
+<hr/>
+
+<div class="row">
+
+    <a class="btn btn-primary" asp-controller="SolicitacaoEmprestimo" asp-action="Criar">Criar nova Solicitação</a>
 </div>
