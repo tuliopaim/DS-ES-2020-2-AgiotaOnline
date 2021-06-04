@@ -15,7 +15,7 @@ namespace EO.Infra.Repositories
             _context = context;
         }
 
-        public async Task<Tomador> ObterPorUsuarioIdCompleto(int id, bool track = false)
+        public async Task<Tomador> ObterPorUsuarioIdComEndereco(int id, bool track = false)
         {
             return await BuildQuery(x => x.UsuarioId == id, track: track)
                 .Include(x => x.Endereco)
@@ -23,6 +23,14 @@ namespace EO.Infra.Repositories
         }
 
         public async Task<Tomador> ObterPorIdCompleto(int id, bool track = false)
+        {
+            return await BuildQuery(x => x.Id == id, track: track)
+                .Include(x => x.Endereco)
+                .Include(x => x.Solicitacoes)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Tomador> ObterPorIdComEndereco(int id, bool track = false)
         {
             return await BuildQuery(x => x.Id == id, track: track)
                 .Include(x => x.Endereco)

@@ -5,8 +5,10 @@ namespace EO.Domain.Interfaces
 {
     public interface ITomadorRepository : IGenericRepository<Tomador>
     {
-        Task<Tomador> ObterPorUsuarioIdCompleto(int id, bool track = false);
+        Task<Tomador> ObterPorUsuarioIdComEndereco(int id, bool track = false);
 
         Task<Tomador> ObterPorIdCompleto(int id, bool track = false);
+
+        Task<Tomador> ObterPorIdComEndereco(int id, bool track = false);
     }
 }

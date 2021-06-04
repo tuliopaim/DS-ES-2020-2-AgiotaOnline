@@ -20,14 +20,14 @@ namespace EO.Application.AppServices
 
         public async Task<EditarTomadorViewModel> ObterParaEdicao(int usuarioId)
         {
-            var tomador = await _repository.ObterPorUsuarioIdCompleto(usuarioId, true);
+            var tomador = await _repository.ObterPorUsuarioIdComEndereco(usuarioId, true);
 
             return _mapper.Map<EditarTomadorViewModel>(tomador);
         }
 
         public async Task AtualizarTomador(EditarTomadorViewModel model)
         {
-            var tomador = await _repository.ObterPorIdCompleto(model.Id, true);
+            var tomador = await _repository.ObterPorIdComEndereco(model.Id, true);
             
             tomador.AlterarRendaMensal(model.RendaMensal);
 
