@@ -22,6 +22,9 @@ namespace EO.UI.Controllers
                 : throw new UnauthorizedAccessException();
         }
 
+        public bool EhTomador() => ObterTipoUsuario() == TipoUsuario.Tomador;
+        public bool EhFornecedor() => ObterTipoUsuario() == TipoUsuario.Fornecedor;
+
         public int ObterIdUsuarioLogado()
         {
             var idStr = ObterClaim(ClaimTypes.NameIdentifier);
