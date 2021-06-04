@@ -1,13 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using EO.Application.ViewModels.InputModels.SolicitacaoEmprestimo;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EO.UI.Controllers
 {
-    public class SolicitacaoEmprestimoController : Controller
+    public class SolicitacaoEmprestimoController : BaseController
     {
-        // GET
-        public IActionResult Index()
+        public IActionResult Criar()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CriarSolicitacao(CriarSolicitacaoEmprestimo model)
+        {
+            model.TomadorId = ObterIdUsuarioLogado();
+
+
+
+            return View("Criar");
         }
     }
 }
