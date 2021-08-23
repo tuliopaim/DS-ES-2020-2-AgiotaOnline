@@ -19,7 +19,7 @@ namespace EO.Infra
         }
 
         public DbSet<Tomador> Tomadores { get; set; }
-        public DbSet<Tomador> Fornecedores { get; set; }
-        public DbSet<Tomador> Enderecos { get; set; }
+        public DbSet<Fornecedor> Fornecedores { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
     }
 }
